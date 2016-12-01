@@ -1,0 +1,92 @@
+
+//--------宽高
+.size ( @w, @h ){
+    width: @w;
+    height: @h;
+}
+
+//------边框
+.border (@bw, @color){
+    border: @bw solid @color;
+}
+
+//--------color
+
+.color( @color, @color1, @color2 , @color3, @color4){
+    color: @color;
+    background:-webkit-gradient(linear,0 0,0 100%,from(@color1),to(@color2));
+    background: -moz-linear-gradient(top,@color3,@color4);
+}
+
+//---------字体样式
+.font ( @size, @weight, @family ){
+    font-size: @size;
+    font-weight: @weight;
+    font-family: @family;
+}
+
+//----------position absolute
+.pos-abs ( @left: 0px, @right: 0px, @top: 0px, @bottom: 0px ){
+    position: absolute;
+    left: @left;
+    right: @right;
+    top: @top;
+    bottom: @bottom;
+}
+
+//-----position relative
+.pos-rel ( @left: 0px, @right: 0px, @top: 0px, @bottom: 0px ){
+    position: relative;
+    left: @left;
+    right: @right;
+    top: @top;
+    bottom: @bottom;
+}
+
+//-----------margin
+.margin(@left: 0px, @right: 0px, @top: 0px, @bottom: 0px){
+    margin-left: @left;
+    margin-right: @right;
+    margin-top: @top;
+    margin-bottom: @bottom;
+}
+
+//----------------------循环
+.loop-point ( @i ) when ( @i < 13 ) {
+
+    .point@{i}{
+        transform: rotate(30deg * ( @i - 1 ));
+    }
+    .loop-point ( @i + 1 )
+}
+.pos(@l){
+    position: absolute;
+    left: @l
+}
+
+//-------------------指针
+
+.animation(@name, @timer, @delay){
+    animation: @name @timer linear @delay infinite;
+}
+
+.fn-keyFrames(@val){
+    @keyframes @val{
+         from{transform: rotate(0deg);}
+         to{transform: rotate(360deg);}
+    }
+}
+//---------------border-radius
+.radius(@sum){
+    border-radius: @sum;
+}
+
+//-----------transform-origin
+.origin( @sum, @count ){
+    transform-origin: @sum @count;
+}
+//-----------background
+.bac( @color ){
+    background: @color;
+}
+

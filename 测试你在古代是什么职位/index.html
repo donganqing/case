@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			table{
+				width:800px;
+				height:400px;
+				background:#d5f;
+				margin:0 auto;
+				border:1px solid #fff;
+			}
+		td{
+			border:3px solid #123;
+			text-align:center;
+			font-weight:bold;
+		}
+		#tx1,#tx2,#tx3{
+			width:50px;
+		}	
+		#tx4{
+			width:300px;
+		}
+		</style>
+		<script>
+			window.onload=function(){
+				function add(id){
+			return document.getElementById(id)
+				}
+			var	oTx1=add("tx1");
+			var	oTx2=add("tx2");
+			var	oTx3=add("tx3");
+			var	oTx4=add("tx4");
+			var	oBnt1=add("bnt1");
+			var	oBnt2=add("bnt2");
+				
+			//var oTx1=document.getElementById("tx1");	
+			//var oTx2=document.getElementById("tx2");	
+			//var oTx3=document.getElementById("tx3");	
+			//var oTx4=document.getElementById("tx4");	
+//			var oBnt1=document.getElementById("bnt1");	
+//		    var oBnt2=document.getElementById("bnt2");	
+			//获取所有的input.
+			function fnName(oTx,str){
+				reg=/^[a-z]{1}$/
+				if(reg.test(oTx.value)){
+					
+				}else{
+					alert(str);
+					oTx.style.color = "red";
+				}
+			}
+			oTx1.onblur=function(){fnName(oTx1,"你输错了！应该是姓的首字母")}
+			oTx2.onblur=function(){fnName(oTx2,"你输错了！应该是名的首字母")}
+			oTx3.onblur=function(){fnName(oTx3,"你输错了！应该是名的首字母")}
+			function fnOnf(oTx){
+				oTx.value="";
+				oTx.style.color="#000"
+			}
+			oTx1.onfocus=function(){fnOnf(oTx1)};
+			oTx2.onfocus=function(){fnOnf(oTx2)};
+			oTx3.onfocus=function(){fnOnf(oTx3)};
+			
+			
+
+				
+			}
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td colspan="3" style="height:50px">测试你在古代的职业</td>
+			</tr>
+			<tr>
+				<td colspan="3"style="height:100px">规则：将你的姓,名的首字母写入对应的方框内，如果姓名合起来只有两个字，那么只填姓，名2两个框；如果是复姓，那么选取姓氏中首个文字的首字母，如：王小二，对应的字母为w,x e</td>
+			</tr>
+				<tr>
+				<td>姓（首字母）:<input type="tetx" id="tx1" />
+				</td>
+				<td>名（首字母）:<input type="tetx" id="tx2" /></td>
+				<td>名2(首字母):<input type="tetx" id="tx3" /></td>
+			</tr>
+				<tr>
+				<td><input type="button" name="bnt" id="bnt1" value="开始测试" /></td>
+				<td><input type="tetx" id="tx4" /></td>
+				<td><input type="reset" name="bnt" id="bnt2" value="重置" /></td>
+			</tr>
+				
+			
+		</table>
+	</body>
+</html>

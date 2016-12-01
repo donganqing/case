@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>瀑布</title>
+		<style>
+		*{margin:0;padding: 0;}
+		li{list-style: none;}
+		#box{margin:0 auto;width:700px;}
+		ul{width: 200px;float:left;margin:0 auto;margin-right: 10px;}
+		img{width:200px;padding-top: 10px;}
+		</style>
+		<script>
+			window.onload = function(){
+				var oBox = document.getElementById("box");
+				var oUl = document.getElementsByTagName("ul");
+				var vH = document.documentElement.clientHeight;
+				//最小高度
+				function min_height(oUl){
+					var HT = oUl[0].offsetHeight;
+					var index = 0;
+					for(var i =0 ;i < oUl.length;i++){
+
+						if(oUl[i].offsetHeight<HT){
+							
+							HT = oUl[i].offsetHeight;
+							index = i;
+						}
+					}
+					return index;
+				}
+				//加载图片
+				function jiazai(){
+					for(var i = 1 ;i < 15;i++ ){
+						var oLi = document.createElement("li");
+						var oImg = document.createElement("img");
+						oImg.src = "images/" + i + ".jpg";
+						oLi.appendChild(oImg);	
+						oUl[min_height(oUl)].appendChild(oLi);
+					}
+				}
+				jiazai();
+				//滚动
+				document.onscroll = function(){
+					var sH = document.documentElement.scrollTop ||document.body.scrollTop;
+					console.log(document.body.scrollHeight + ":" + document.body.offsetHeight + ":" + (sH + vH));
+					//document.body.scrollHeight:页面元素的滚动高度（页面内容的实际高度）
+					if(sH + vH >= document.body.scrollHeight * 0.8) {
+						jiazai();
+					}
+					};
+					};</script>
+	</head>
+	<body>
+		<div id = "box">
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+		</div>
+	</body>
+
+</html>

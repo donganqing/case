@@ -1,0 +1,242 @@
+	.cart_det {
+		width: 100%;
+	}
+
+	.subcart_det {
+		width: 1198px;
+		min-height: 30px;
+		margin: 0 auto;
+		font-size: 12px;
+		color: #333;
+	}
+	
+	.list-head {
+		width: 1198px;
+		height: 30px;
+		line-height: 30px;
+		background: #F7F7F7;
+		border: 1px solid #DEDEDE;
+	}
+	
+	.th1 {
+		width: 37px;
+		text-align: center;
+		padding-right: 9px;
+	}
+	
+	.th2 {
+		width: 617px;
+		text-align: center;
+	}
+	
+	.th3 {
+		width: 155px;
+		text-align: center;
+	}
+	
+	.th4,
+	.th5 {
+		width: 140px;
+		text-align: center;
+	}
+	
+	.th6 {
+		width: 100px;
+		text-align: center;
+	}
+	
+	
+	/*-----购物车主要内容----*/
+	
+	.cart_list {
+		width: 1198px;
+		border: 1px solid #DEDEDE;
+		border-top: none;
+		border-bottom: none;
+	}
+	
+	.cart_detail {
+		border-bottom: 1px solid #DEDEDE;
+	}
+	
+	.td1 input {
+		margin-top: 10px;
+	}
+	
+	.td2 {
+		width: 617px;
+		border-right: 1px solid #DEDEDE;
+	}
+	
+	.td3,
+	.td4,
+	.td5 {
+		border-right: 1px solid #DEDEDE;
+	}
+	
+	.td2 .p_img a img {
+		width: 65px;
+		height: 65px;
+		margin-top: -15px;
+	}
+	
+	.p_img,
+	.p_name {
+		float: left;
+	}
+	
+	.p_name a:hover {
+		text-decoration: underline;
+	}
+	
+	.pro_area {
+		padding: 20px 20px 20px 0;
+	}
+	
+	.p_name a {
+		color: #333333;
+		line-height: 17px;
+	}
+	
+	.p_name span {
+		color: #999;
+		line-height: 17px;
+	}
+	
+	.add {
+		width: 58px;
+		height: 38px;
+		position: relative;
+		margin-left: 40px;
+	}
+	
+	#addCount {
+		width: 37px;
+		height: 37px;
+		text-align: center;
+		line-height: 37px;
+		border: none;
+		outline: none;
+		border: 1px solid #333;
+		float: left;
+	}
+	
+	.kua {
+		float: right;
+	}
+	
+	.j {
+		position: relative;
+		display: block;
+		width: 16px;
+		height: 16px;
+		text-align: center;
+		line-height: 16px;
+		border: 1px solid #333;
+		cursor: pointer;
+	}
+	.jia{
+		top: -12px;
+	}
+	
+	.jian {
+		top: -8px;
+	}
+	.td6 a{
+		text-decoration: none;
+		color: #333;
+	}
+	
+	
+	.delete {
+	width: 100%;
+	margin-top: 30px;
+}
+
+.delete_cart {
+	width: 1170px;
+	height: 154px;
+	margin-top: 20px;
+	padding: 0px 20px 0px 10px;
+	border: 1px solid #DEDEDE;
+	margin: 0 auto;
+}
+
+.delete_left {
+	color: #007dff;
+	font-size: 12px;
+	float: left;
+	padding: 20px 0 0 0;
+}
+
+.delete_left a {
+	color: #007dff;
+}
+
+.l {
+	margin-left: 15px;
+}
+
+.delete_right {
+	font-size: 12px;
+	color: #333;
+	float: right;
+}
+
+.delete_right p {
+	width: 265px;
+	text-align: right;
+	height: 38px;
+	line-height: 38px;
+}
+
+.line {
+	border-bottom: 1px solid #DEDEDE;
+}
+
+.no_line {
+	font-size: 14px;
+}
+
+.no_line .l {
+	color: #e01d20;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.no_line #addMoney {
+	margin-left: 0;
+}
+
+.go_on {
+	width: 1200px;
+	margin: 0 auto;
+	text-align: right;
+	margin-top: 30px;
+	margin-bottom: 100px;
+}
+
+.go_on .g {
+	display: inline-block;
+	width: 150px;
+	height: 37px;
+	line-height: 37px;
+	text-align: center;
+	font-size: 16px;
+}
+
+.go_on .g:hover {
+	opacity: .5;
+}
+
+.go_on .a1 {
+	border: 1px solid #D1D1D1;
+	background: #F7F7F7;
+}
+
+.go_on .a2 {
+	border: 1px solid #E01D20;
+	background: #e01d20;
+	color: #fff;
+	margin-left: 20px;
+}

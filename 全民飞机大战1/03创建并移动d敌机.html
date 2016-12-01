@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#content {
+				width: 512px;
+				height: 768px;
+				position: absolute;
+				left: 500px;
+			}
+			
+			#startDiv {
+				width: 512px;
+				height: 768px;
+				background: url(img/img_bg_logo.jpg) no-repeat;
+				position: absolute;
+			}
+			
+			#btstart {
+				width: 300px;
+				height: 100px;
+				font-size:26px;
+				background: url(img/blue1.png) no-repeat;
+				background-size:100% 100%;
+				position: absolute;
+				left: 106px;
+				top: 500px;
+				border: none;
+			}
+			
+			#mainDiv {
+				width: 512px;
+				height: 768px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: url(img/img_bg_level_3.jpg);
+				display: none;
+			}
+			#img{
+				width:500px;
+				position:absolute;
+				left:6px;
+				top:50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="content">
+			<div id="startDiv">
+				<input type="button" id="btstart" value="Start Game" />
+				<img src="img/LOGO.png" id="img"/>
+			</div>
+			<div id="mainDiv"></div>
+		</div>
+
+	</body>
+	<script>
+		var oBtstart = document.getElementById("btstart");
+		var oMainDiv = document.getElementById("mainDiv");
+		var oStartDiv = document.getElementById("startDiv");
+		//游戏界面的背景定位坐标
+		var timer;
+		//记录我的数组
+		var myPlan;
+		var MainDivBKPositionY = 0;
+		//存放子弹的数组
+		var arrBullet = []
+			//子弹的速度
+		var speedBullet = 40;
+		//存放所有的敌机
+		var arrEnemy=[];
+		//敌机的速度
+		var speedEnemy=2;
+		//定时器的记录
+		var timerMark=0;
+		//游戏界面的宽高度
+		var mainWidth=512;
+		var mainHeight=768;
+		
+
+		oBtstart.onclick = function() {
+			oMainDiv.style.display = "block";
+			oStartDiv.style.display = "none";
+
+			//创建我的飞机
+			myPlan = createMyPlan();
+			//移动我的飞机
+			moveMyPlan()
+			//移动背景图
+			startGame();
+
+			//创建我的飞机
+			function createMyPlan() {
+				var oMyPlan = document.createElement("div");
+				oMyPlan.style.width = "120px";
+				oMyPlan.style.height = "79px";
+				oMyPlan.style.position = "absolute";
+				oMyPlan.style.left = "196px";
+				oMyPlan.style.top = "600PX";
+				oMyPlan.style.backgroundImage = "url(img/wsparticle_test_001.png)";
+				oMainDiv.appendChild(oMyPlan);
+				return oMyPlan;
+			}
+
+			//移动我的飞机
+			function moveMyPlan() {
+				document.onmousemove = function(e) {
+					var mLeft = e.clientX - 500 - 60;
+					var mTop = e.clientY - 40;
+					//边界问题
+					if(mLeft <= -60) {
+						mLeft = -60;
+					}
+					if(mLeft >= 512 - 60) {
+						mLeft = 512 - 60;
+					}
+					if(mTop <= 0) {
+						mTop = 0
+					}
+					if(mTop >= 768 - 80) {
+						mTop = 768 - 80;
+					}
+					myPlan.style.left = mLeft + "px";
+					myPlan.style.top = mTop + "px";
+				}
+			}
+
+			//移动背景图片
+			function startGame() {
+				clearInterval(timer);
+				timer = setInterval(function() {
+					timerMark++;
+					//背景动起来
+					oMainDiv.style.backgroundPositionY = MainDivBKPositionY + "px";
+					MainDivBKPositionY += 0.5;
+					//创建子弹
+					//每30毫秒创建一个
+					moveBullet();
+					createBullet();
+					createEnemy();
+					moveEnemy();
+					
+
+
+				}, 30)
+			}
+			
+			//创建敌机
+			function createEnemy(){
+				if(timerMark%700==0){
+					//创建大飞机
+					createPlan(254,195,"img/bigEnemy.gif");
+					
+				}else if(timerMark%300==0){
+					//创建中飞机
+					createPlan(174,132,"img/enemyMiddle.gif");
+					
+				}else if(timerMark%50==0){
+					//创建小飞机
+					createPlan(117,85,"img/enemyLitter.gif");
+				}
+			}
+			//创建敌机的方法
+			function createPlan(width,height,url){
+				var enemy=document.createElement("img");
+				enemy.style.width=width+"px";
+				enemy.style.height=height+"px";
+				enemy.src=url;
+				enemy.style.position="absolute";
+				enemy.style.left = Math.floor(Math.random() * (mainWidth - width)) + "px";
+				enemy.style.top=-height+"px";
+				oMainDiv.appendChild(enemy);
+				arrEnemy.push(enemy);
+				//console.log(arrEnemy.length);
+			}
+			//移动敌机
+			function moveEnemy() {
+				for(var i = 0; i < arrEnemy.length; i++) {
+					arrEnemy[i].style.top = arrEnemy[i].offsetTop + speedEnemy + "px";
+				}
+				//console.log(arrEnemy[0].offsetTop);
+				if(arrEnemy.length > 0) {
+					console.log(arrEnemy[0].style.top);
+				}
+				for(var j = 0; j < arrEnemy.length; j++) {
+					if(arrEnemy[j].offsetTop+arrEnemy[j].offsetHeight >= mainHeight) {
+						oMainDiv.removeChild(arrEnemy[j]);
+						arrEnemy.splice(j, 1);
+						j--;
+						//删除j位置的元素后，后面的元素都向前移动了一位。为了不漏掉元素的遍历，j--
+					}
+				}
+			}
+			
+
+			//创建子弹
+			function createBullet() {
+				var bullet = document.createElement("div");
+				bullet.style.width = "96px";
+				bullet.style.height = "96px";
+				bullet.style.background = "url(img/wsparticle_tailinga_0.png)";
+				bullet.style.position = "absolute";
+				bullet.style.left = myPlan.offsetLeft + 10 + "px";
+				bullet.style.top = myPlan.offsetTop - 50 + "px";
+				oMainDiv.appendChild(bullet);
+				arrBullet.push(bullet);
+			}
+			//移动子弹，所有的子弹移动一步；
+			//然后在定时器中调用
+			function moveBullet() {
+				//操作子弹的top，让子弹向上跑；
+				//是否在此启动一个计时器
+				for(i = 0; i < arrBullet.length; i++) {
+					arrBullet[i].style.top = arrBullet[i].offsetTop - speedBullet + "px";
+				}
+				//如果子弹出去了界面 删除子弹
+				//top=-96
+				for(var j = 0; j < arrBullet.length; j++) {
+					if(arrBullet[j].offsetTop <= -96) {
+						//删除
+						oMainDiv.removeChild(arrBullet[j]);
+						arrBullet.splice(j, 1);
+					}
+				}
+
+			}
+
+		}
+	</script>
+
+</html>

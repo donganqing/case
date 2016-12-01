@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.3.js" type="application/javascript"></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: #AABBCC;
+			}
+			#box{
+				width: 1225px;
+
+				margin: 0 auto;
+			}
+			.list{
+				width: 245px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="list"></div>
+			<div class="list"></div>
+			<div class="list"></div>
+			<div class="list"></div>
+			<div class="list"></div>
+		</div>
+	</body>
+	<script>
+		var json = [];
+		$(function(){
+			$.getJSON("json.json",function(data){
+				json = data;
+				//alert(json[0].src);
+				init();
+			});
+		})
+		 //加载方法
+			function init() {
+				var div; //要添加的图片
+				for (var i = 0; i < json.length; i++) {
+					div = "";
+					div += '<div>';
+					div += '<img src="' + json[i].src + '" height="' + json[i].height + '" width="230px"/>';
+					div += '</div>';
+					getList($(".list")).append(div);
+					// alert(div); 如果不添加为 ""的div会每次循环都带上之前的
+				}
+			}
+		function getList(obj) {
+				var index = 0; //最小list的下标，假设第一个的高度最小
+				var h = obj.eq(0).height(); //最小高度，假设为第一个
+				for (var i = 1; i < obj.length; i++) {
+					if (obj.eq(i).height() < h) { // 比假设的最小的要小
+						index = i; //比他小更新他
+						h = obj.eq(i).height();
+					}
+				}
+				return obj.eq(index);
+			}
+		
+		 //无限加载
+			var _height = $(window).height(); //窗口高度
+			$(window).scroll(function() {
+				var scrollHeight = document.body.scrollHeight; //滚动高度
+				var scrollTop = document.body.scrollTop; //滚动条与离顶部的距离
+				if (scrollTop + _height >= scrollHeight) {
+					init();
+				}
+			});
+	</script>
+</html>

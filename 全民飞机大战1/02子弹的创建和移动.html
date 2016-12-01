@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#content {
+				width: 512px;
+				height: 768px;
+				position: absolute;
+				left: 500px;
+			}
+			
+			#startDiv {
+				width: 512px;
+				height: 768px;
+				background: url(img/img_bg_logo.jpg) no-repeat;
+				position: absolute;
+			}
+			
+			#btstart {
+				width: 300px;
+				height: 100px;
+				font-size:26px;
+				background: url(img/blue1.png) no-repeat;
+				background-size:100% 100%;
+				position: absolute;
+				left: 106px;
+				top: 500px;
+				border: none;
+			}
+			
+			#mainDiv {
+				width: 512px;
+				height: 768px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: url(img/img_bg_level_3.jpg);
+				display: none;
+			}
+			#img{
+				width:500px;
+				position:absolute;
+				left:6px;
+				top:50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="content">
+			<div id="startDiv">
+				<input type="button" id="btstart" value="Start Game" />
+				<img src="img/LOGO.png" id="img"/>
+			</div>
+			<div id="mainDiv"></div>
+		</div>
+
+	</body>
+	<script>
+		var oBtstart = document.getElementById("btstart");
+		var oMainDiv = document.getElementById("mainDiv");
+		var oStartDiv = document.getElementById("startDiv");
+		//游戏界面的背景定位坐标
+		var timer;
+		//记录我的数组
+		var myPlan;
+		var MainDivBKPositionY = 0;
+		//存放子弹的数组
+		var arrBullet = []
+			//子弹的速度
+		var speedBullet = 40;
+
+		oBtstart.onclick = function() {
+			oMainDiv.style.display = "block";
+			oStartDiv.style.display = "none";
+
+			//创建我的飞机
+			myPlan = createMyPlan();
+			//移动我的飞机
+			moveMyPlan()
+				//移动背景图
+			startGame();
+
+			//创建我的飞机
+			function createMyPlan() {
+				var oMyPlan = document.createElement("div");
+				oMyPlan.style.width = "120px";
+				oMyPlan.style.height = "79px";
+				oMyPlan.style.position = "absolute";
+				oMyPlan.style.left = "196px";
+				oMyPlan.style.top = "600PX";
+				oMyPlan.style.backgroundImage = "url(img/wsparticle_test_001.png)";
+				oMainDiv.appendChild(oMyPlan);
+				return oMyPlan;
+			}
+
+			//移动我的飞机
+			function moveMyPlan() {
+				document.onmousemove = function(e) {
+					var mLeft = e.clientX - 500 - 60;
+					var mTop = e.clientY - 40;
+					//边界问题
+					if(mLeft <= -60) {
+						mLeft = -60;
+					}
+					if(mLeft >= 512 - 60) {
+						mLeft = 512 - 60;
+					}
+					if(mTop <= 0) {
+						mTop = 0
+					}
+					if(mTop >= 768 - 80) {
+						mTop = 768 - 80;
+					}
+					myPlan.style.left = mLeft + "px";
+					myPlan.style.top = mTop + "px";
+				}
+			}
+
+			//移动背景图片
+			function startGame() {
+				clearInterval(timer);
+				timer = setInterval(function() {
+					//背景动起来
+					oMainDiv.style.backgroundPositionY = MainDivBKPositionY + "px";
+					MainDivBKPositionY += 0.5;
+					//创建子弹
+					//每30毫秒创建一个
+					moveBullet();
+					createBullet();
+
+				}, 30)
+			}
+
+			//创建子弹
+			function createBullet() {
+				var bullet = document.createElement("div");
+				bullet.style.width = "96px";
+				bullet.style.height = "96px";
+				bullet.style.background = "url(img/wsparticle_tailinga_0.png)";
+				bullet.style.position = "absolute";
+				bullet.style.left = myPlan.offsetLeft + 10 + "px";
+				bullet.style.top = myPlan.offsetTop - 50 + "px";
+				oMainDiv.appendChild(bullet);
+				arrBullet.push(bullet);
+			}
+			//移动子弹，所有的子弹移动一步；
+			//然后在定时器中调用
+			function moveBullet() {
+				//操作子弹的top，让子弹向上跑；
+				//是否在此启动一个计时器
+				for(i = 0; i < arrBullet.length; i++) {
+					arrBullet[i].style.top = arrBullet[i].offsetTop - speedBullet + "px";
+				}
+				//如果子弹出去了界面 删除子弹
+				//top=-128
+				for(var j = 0; j < arrBullet.length; j++) {
+					if(arrBullet[j].offsetTop <= -128) {
+						//删除
+						oMainDiv.removeChild(arrBullet[j]);
+						arrBullet.splice(j, 1);
+					}
+				}
+
+			}
+
+		}
+	</script>
+
+</html>

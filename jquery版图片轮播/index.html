@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery-3.1.0.min.js" type="application/javascript"></script>
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul li{
+			list-style: none;
+		}
+			#banner{
+				position: relative;
+				width: 100%;
+				height: 448px;
+				border: 1px solid red;
+				cursor: pointer;
+			}
+			#banner img{
+				position: absolute;
+				width: 100%;
+				height: 448px;
+			}
+			#banner #img1{
+				z-index: 4;
+			}
+			#banner #count{
+				position: absolute;
+				z-index: 6;
+				right: 80px;
+				top: 400px;
+			}
+			#banner #count ul li{
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				color: #fff;
+				border-radius: 10px;
+				background: #333;
+				float: left;
+				margin-left: 5px;
+			}
+			#banner #count .count1{
+				background: #c81118;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="banner">
+			<div id="pic">
+				<a href="#"><img id="img1" src="img/banner1.jpg"/></a>
+				<a href="#"><img src="img/banner2.jpg"/></a>
+				<a href="#"><img src="img/banner3.jpg"/></a>
+				<a href="#"><img src="img/banner4.jpg"/></a>
+				<a href="#"><img src="img/banner5.jpg"/></a>
+				<a href="#"><img src="img/banner6.jpg"/></a>
+				<a href="#"><img src="img/banner7.jpg"/></a>
+				<a href="#"><img src="img/banner8.jpg"/></a>
+				<a href="#"><img src="img/banner9.jpg"/></a>
+			</div>
+			<div id="count">
+				<ul>
+					<li class="count1">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>6</li>
+					<li>7</li>
+					<li>8</li>
+					<li>9</li>
+				</ul>
+			</div>
+		</div>
+		
+	</body>
+	<script>
+		
+		function startPlan(name,attr,count,element){
+			timer=setInterval(function(){
+				if(!isCompelet){
+				index++;
+			if(index == count){
+				index = 0;
+			}
+			element.eq(index).children().fadeIn(300).parent().siblings().children().fadeOut(300);
+			$(name).eq(index).addClass(attr).siblings().removeClass(attr);	
+				}
+			},1000)
+		}
+		
+		function myImages(name,attr,count,element){//name:数字所对应的元素的集合。attr:第一个数字背景色对应的class="li"的style样式
+			for(var i=0;i<count;i++){//count:对应的图片的数量.element:图片对应的所有的img集合
+			$(name).eq(i).index=i
+			$(name).eq(i).mouseenter(function(){
+				var a=$(this).index();
+				index=a;
+				startPlan();
+				clearInterval(timer);
+				element.eq(a).children().fadeIn(300).parent().siblings().children().fadeOut(300);
+				$(this).addClass(attr).siblings().removeClass(attr);
+			});
+			}
+		}
+		
+		function event(name){
+		$(name).mouseenter(function(){isCompelet=true});
+		$(name).mouseleave(function(){isCompelet=false});	
+		}
+		
+		
+		var $img = $("#pic a").length;//获得所有的img的数量  即封装函数startPlan中的count
+		var $pic = $("#pic a");//获取所有的img
+		var index = 0;
+		var timer;
+		var isCompelet=false;	
+		startPlan("#count ul li","count1",$img,$pic);
+		event("#banner");
+		myImages("#count ul li","count1",$img,$pic);
+		
+		
+		
+		
+	</script>
+</html>

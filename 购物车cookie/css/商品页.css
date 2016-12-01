@@ -1,0 +1,116 @@
+		* {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			font-family: 微软雅黑;
+		}
+		
+		ul li {
+			list-style: none;
+		}
+		
+		#cartBox {
+			width: 100%;
+			height: 50px;
+			margin-top: 50px;
+		}
+		
+		#cartBox a {
+			display: block;
+			width: 200px;
+			height: 50px;
+			text-align: center;
+			background: #dedede;
+			border: 2px solid #333;
+			text-decoration: none;
+			float: right;
+		}
+		
+		#cartBox a span {
+			font-size: 30px;
+		}
+		
+		#count {
+			position: absolute;
+			right: 155px;
+			top: 5px;
+			width: 20px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			background: red;
+			font-size: 20px;
+			border-radius: 4px;
+		}
+		
+		#div {
+			position: absolute;
+			right: 159px;
+			top: 45px;
+			width: 0;
+			height: 0;
+			border: 5px solid #000000;
+			border-color: red transparent transparent transparent;
+		}
+		
+		#products {
+			width: 1100px;
+			margin: 10px auto;
+			margin-top: 30px;
+		}
+		
+		#pr {
+			width: 1100px;
+			height: 260px;
+		}
+		
+		#products li {
+			width: 260px;
+			float: left;
+			border: solid 1px #E9E9E9;
+			margin-right: 10px;
+		}
+		
+		#products li span {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+		
+		#products li em {
+			display: block;
+			margin-left: 91px;
+		}
+		
+		#products li em,
+		#products li em b {
+			font-size: 24px;
+			font-family: Arial;
+			color: #E4393C;
+		}
+		
+		#products li p {
+			color: #333;
+			margin: 10px 0 0 70px;
+		}
+		
+		#products li a {
+			display: block;
+			width: 120px;
+			height: 30px;
+			line-height: 30px;
+			border: solid 1px #DDDDDD;
+			text-align: center;
+			margin: 20px auto;
+			text-decoration: none;
+			color: #E4393C;
+		}
+		
+		#products li a:hover {
+			border: solid 1px #E4393C;
+		}
+		
+		b,
+		em {
+			font-style: normal;
+		}

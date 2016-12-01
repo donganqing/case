@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#box {
+				width: 810px;
+				height: 320px;
+				position: relative;
+				margin: 20px auto;
+			}
+			
+			#div1 {
+				width: 810px;
+				height: 310px;
+				position: absolute;
+				overflow: hidden;
+			}
+			
+			#imgul {
+				width: 4050px;
+				list-style: none;
+				position: absolute;
+			}
+			
+			li {
+				float: left;
+			}
+			
+			#navulid {
+				position: absolute;
+				left: 630px;
+				top: 260px;
+				list-style: none;
+				cursor:pointer;
+			}
+			
+			#navulid li {
+				width: 30px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				margin-right: 10px;
+			}
+			
+			.lion {
+				background: darkolivegreen;
+			}
+			
+			.liun {
+				background: blanchedalmond;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<div id="div1">
+				<ul id="imgul">
+					<li><img src="img/001.jpg" /></li>
+					<li><img src="img/002.jpg" /></li>
+					<li><img src="img/003.jpg" /></li>
+					<li><img src="img/004.jpg" /></li>
+					<li><img src="img/001.jpg" /></li>
+				</ul>
+			</div>
+			<ul id="navulid">
+				<li class="lion">1</li>
+				<li class="liun">2</li>
+				<li class="liun">3</li>
+				<li class="liun">4</li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		//1. 把4张图片放在一行，通过改变ul的left值，让图片轮播
+		// ul:position:absolute; ul的宽度为5张图片的宽度。
+		//2.四张图片只能看到一张，所以div1 overflow：hidden div1的宽度为一张图片的宽度 ，高度也是一张图片的高度
+		//  div1只是一个窗口的作用
+		var oUl = document.getElementById("imgul");
+		var indexLiList = document.getElementById("navulid").children;
+		var isComplete = false;
+		
+		//播放一遍；
+		var pageIndex = 1; //默认显示的第一张图片；
+		var timer;
+		startPlan();
+		for(var i = 0; i < indexLiList.length; i++) {
+			indexLiList[i].index = i;
+			indexLiList[i].onclick = function() {
+				//oUl.style.left=-1*i*810+"px";
+				clearInterval(timer);
+				//pageIndex, 同步；
+				pageIndex = this.index + 1;
+				move(oUl, {
+					"left": -1 * this.index * 810
+				}, startPlan);
+				for(var k = 0; k < indexLiList.length; k++) {
+					indexLiList[k].className = "liun";
+				}
+				this.className = "lion";
+			}
+		}
+		//自动播放；
+		function startPlan() {
+			timer = setInterval(function() {
+				if(!isComplete) {
+					//播放图片；
+					// ul 的left值变为：-1*(pageIndex-1)*810  ;动画的方式；
+					//oUl.style.left=-1*(pageIndex-1)*810+"px";
+					if(pageIndex == 5) {
+						//显示的是（5）第一张；
+						oUl.style.left = "0px"; //第一张图片；
+						pageIndex = 1;
+					}
+					pageIndex++;
+					move(oUl, {
+						"left": -1 * (pageIndex - 1) * 810
+					});
+					//边界：到了最后的时候，拽回来；
+					//把pageIndex对应的页签变为选中状态，其他页签变为不选中状态；
+					for(var i = 0; i < indexLiList.length; i++) {
+						indexLiList[i].className = "liun";
+					}
+					//pageIndex  1,2,3,4,5
+					//0，1,2,3
+					if(pageIndex == 5) {
+						indexLiList[0].className = "lion";
+					} else {
+						indexLiList[pageIndex - 1].className = "lion";
+					}
+				}
+			}, 3000);
+		}
+
+
+		oUl.onmouseover = function() {
+			isComplete = true;
+		}
+		oUl.onmouseout = function() {
+			isComplete = false;
+		}
+	</script>
+
+</html>

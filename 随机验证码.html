@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>验证码</title>
+	</head>
+	<body>
+		<input type="text" id="txt1" value="" />
+		<input type="button" value="刷新" onclick="show()" />
+		<script>
+		//第一个函数：产生随机数
+			function validateCode(n){
+				//验证码中可能包含的字符
+				var s="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+				var ret="";//保存生成的验证码
+				//利用for循环，随机产生验证码中的每个字符
+				for(var i=0; i<n; i++){
+					var index=Math.floor(Math.random()*62);//随机产生一个数值
+					
+					//随机产生的数值相于当字符串的位置下标，然后从字符串s中取出该字符，放到ret里面
+					ret+=s.charAt(index);
+				}
+				return ret;//返回产生的验证码
+			}
+			//第二个函数：显示随机数
+			function show(){
+				var oTx1=document.getElementById("txt1");
+				//在id为txt1的对象中显示验证码
+				oTx1.value=validateCode(4);
+			}
+			window.onload=show;//页面加载时执行函数show
+		</script>
+	</body>
+</html>

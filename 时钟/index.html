@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="css/timer.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="box">
+		<div class="circle">
+			<div class="point point1"></div>
+			<div class="point point2"></div>
+			<div class="point point3"></div>
+			<div class="point point4"></div>
+			<div class="point point5"></div>
+			<div class="point point6"></div>
+			<div class="point point7"></div>
+			<div class="point point8"></div>
+			<div class="point point9"></div>
+			<div class="point point10"></div>
+			<div class="point point11"></div>
+			<div class="point point12"></div>
+		</div>
+		<div class="twelve tim">12</div>
+		<div class="three tim">3</div>
+		<div class="six tim">6</div>
+		<div class="nine tim">9</div>
+		<div class="shi yuan">
+			<div id="shi"></div>
+		</div>
+		<div class="fen yuan">
+			<div id="fen"></div>
+		</div>
+		<div class="miao yuan">
+			<div id="miao"></div>
+		</div>
+		<div class="xin"></div>
+	</div>
+	</body>
+	<script>
+		// setInterval(function(){
+		var miao = document.getElementById("miao");
+		var fen = document.getElementById("fen");
+		var shi = document.getElementById("shi");
+		var dDate = new Date();
+		var seconds = dDate.getSeconds()/60*360;
+		var minutes = dDate.getMinutes()/60*360;
+		var hours = dDate.getHours()/12*360 + dDate.getMinutes()/2;
+		miao.style.transform = "rotate("+seconds+"deg)";
+		fen.style.transform = "rotate("+minutes+"deg)";
+		shi.style.transform = "rotate("+hours+"deg)";
+		//console.log(minutes);
+		//console.log(hours);
+		// },1000)
+
+	</script>
+</html>

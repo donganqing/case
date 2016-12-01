@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>姓名测试</title>
+	    <style type="text/css">
+	    	table{
+	    		background : indianred;
+	    		background-size: 100% 100%;
+	    		text-align: center;
+	    	}
+	    	td{
+	    		border: 1px solid #000;	    		
+	    		}
+	    	#tx4{
+	    		width:100px;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td colspan="3">测测你在古代的职业</td>
+			</tr>
+			<tr>
+				<td colspan="3">规则：将你姓名的首字母写入相对应的方框内</td>
+			</tr>
+			<tr>
+				<td>
+					姓（首字母）:<input type="text" name="tx1" id="tx1" value="" />
+				</td>
+				<td>
+					名（首字母）: <input type="text" name="tx2" id="tx2" value="" />
+				</td>
+			    <td>
+			    	名2（首字母）： <input type="text" name="tx3" id="tx3" value="" />
+			    </td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" name="btn" id="btn" value="开始测试" />
+				</td>
+				<td>
+					<input type="text" name="tx4" id="tx4" value="" />
+				</td>
+			    <td>
+			    	<input type="button" name="btn2" id="btn2" value="重置" />
+			    </td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript">
+		var otx1=document.getElementById("tx1");
+		var otx2=document.getElementById("tx2");
+		var otx3=document.getElementById("tx3");
+		var otx4=document.getElementById("tx4");
+		var obtn1=document.getElementById("btn");
+		var obtn2=document.getElementById("btn2");
+		otx1.onfocus = function(){ fnOnc(otx1);}
+		otx2.onfocus = function(){ fnOnc(otx2);}
+		otx3.onfocus = function(){ fnOnc(otx3);}
+		function fnOnc(otx){
+			otx.value="";
+			otx.style.color="#000"
+			
+		}
+		otx1.onblur =function(){ fnName(otx1,"请输入姓首字母");}
+		otx2.onblur =function(){ fnName(otx2,"请输入名字首字母");}
+		otx3.onblur =function(){ fnName(otx3,"请输入名字首字母");}
+		function fnName(otx,str){
+			reg=/^[a-z]{1}$/
+			if(reg.test(otx.value)){
+				
+			}else{
+				otx.value=str 
+			    otx.style.color="red"
+			}
+		}
+		
+		obtn1.onclick = function (){
+		  if(otx1.value=="f"&&otx2.value=="x"&&otx3.value=="c"){
+		  	return otx4.value="明明可以靠脸吃饭却靠才华"
+		  }
+		  if(otx1.value==""||otx3.value==""||otx1.value=="请输入姓首字母"||otx3.value=="请输入名字首字母"){
+		  	return otx4.value="请正确输入姓名"
+		  }
+		  sjstr=parseInt(Math.random()*10)
+		  switch(sjstr){
+		  	case 0: str = "元朝";break;
+		  	case 1: str = "明朝";break;
+		  	case 2: str = "清朝";break;
+		  	case 3: str = "唐朝";break;
+		  	case 4: str = "民国";break;
+		  	case 5: str = "魏国";break;
+		  	case 6: str = "商朝";break;
+		  	case 7: str = "宋朝";break;
+		  	case 8: str = "战国";break;
+		  	case 9: str = "蜀国";break;	
+		  }
+		  sjstr2=parseInt(Math.random()*10)	  
+		  switch(sjstr2){
+		  	case 0: str1 = "最帅";break;
+		  	case 1: str1 = "最美";break;
+		  	case 2: str1 = "最屌丝";break;
+		  	case 3: str1 = "最LOW";break;
+		  	case 4: str1 = "笨";break;
+		  	case 5: str1 = "聪明";break;
+		  	case 6: str1 = "正义";break;
+		  	case 7: str1 = "漂亮";break;
+		  	case 8: str1 = "猥琐";break;
+		  	case 9: str1 = "无私";break;		  
+		  	default: str1 = "";break;
+		  }
+		  sjstr3=parseInt(Math.random()*10)	  		  
+		  switch(sjstr3){
+		  	case 0: str2 = "丞相";break;
+		  	case 1: str2 = "太监";break;
+		  	case 2: str2 = "皇上";break;
+		  	case 3: str2 = "皇后";break;
+		  	case 4: str2 = "妃子";break;
+		  	case 5: str2 = "宫女";break;
+		  	case 6: str2 = "侠客";break;
+		  	case 7: str2 = "社会哥";break;
+		  	case 8: str2 = "女侠";break;
+		  	case 9: str2 = "秃瓢";break;
+		  	default: str2 = "";break;
+		  	
+		  }
+		  
+		  	  otx4.value=str+str1+str2;
+		  
+		}
+		obtn2.onclick=function(){
+			otx1.value="";
+			otx2.value="";
+			otx3.value="";
+			otx4.value="";
+		}
+	</script>
+</html>

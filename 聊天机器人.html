@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box {
+				width: 550px;
+				height: 740px;
+				border: 1px solid #abc;
+				margin: 0 auto;
+			}
+			
+			#div {
+				width: 500px;
+				height: 450px;
+				border: 1px solid #AABBCC;
+				margin: 10px auto;
+				overflow: auto;
+			}
+			
+			#chat {
+				width: 500px;
+				height: 200px;
+				border: 1px solid #abc;
+				margin-left: 25px;
+				resize: none;
+			}
+			
+			#bnt1 {
+				position: relative;
+				left: 480px;
+				top: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<div id="div">
+			</div>
+			<textarea id="chat"></textarea>
+			<input type="button" name="bnt1" id="bnt1" value="发送" />
+		</div>
+	</body>
+	<script>
+		var oDiv = document.getElementById("div");
+		var oBnt = document.getElementById("bnt1");
+		var oChat = document.getElementById("chat");
+		oBnt.onclick = function() {add()}
+		function add(){
+		var txt = oChat.value;
+			var span1 = document.createElement("span");
+			var p1 = document.createElement("p");
+			p1.style.textAlign = "right";
+			span1.style.background = "chartreuse";
+			span1.style.borderRadius="5px";
+			span1.innerHTML = txt;
+			p1.appendChild(span1);
+			oDiv.appendChild(p1);
+			oChat.value = "";
+			//console.log(txt);
+			var xhr;
+			if(window.XMLHttpRequest) {
+				xhr = new XMLHttpRequest();
+			} else {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			//var url="http://apis.baidu.com/turing/turing/turing?key=879a6cb3afb84dbf4fc84a1df2ab7319&info=吃了吗&userid=eb2edb736'";
+			xhr.open("get", "http://apis.baidu.com/turing/turing/turing?key=879a6cb3afb84dbf4fc84a1df2ab7319&info=" + txt + "&userid=eb2edb736'", true);
+			xhr.setRequestHeader("apikey", "45d8173dfc35ce17924e1141a441258e");
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState == 4) {
+					if(xhr.status == 200) {
+						var oData = JSON.parse(xhr.responseText);
+						var span2 = document.createElement("span");
+						span2.style.background = "#AABBCC";
+						span2.style.borderRadius="5px";
+						var p2 = document.createElement("p");
+						span2.innerHTML = oData.text;
+						console.log(oData.text);
+						p2.appendChild(span2);
+						oDiv.appendChild(span2);
+					}
+				}
+			}
+			xhr.send();	
+			
+			
+		}
+		//点击回车键也可以发送
+		document.onkeydown=function(e){
+			var e=e||window.event;
+			//console.log(e.keyCode);
+			if(e.keyCode==13){
+				add();
+			}
+		}
+		//当出现滚动条时，让滚动条一直处于最底部。
+		window.onload=function(){
+			var s=setInterval("sc()",100);
+		}
+		function sc(){
+			oDiv.scrollTop = oDiv.scrollHeight;
+		}
+	</script>
+
+</html>

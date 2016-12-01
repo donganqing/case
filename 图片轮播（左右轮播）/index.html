@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.box {
+				width: 800px;
+				height: 400px;
+				position: relative;
+				margin: 20px auto;
+			}
+			
+			.pic {
+				width: 800px;
+				height: 400px;
+				position: absolute;
+				overflow: hidden;
+			}
+			
+			#top {
+				width: 5600px;
+				list-style: none;
+				position: absolute;
+				cursor: pointer;
+			}
+			#top li img{
+				width: 800px;
+				height: 400px;
+			}
+			
+			li {
+				float: left;
+			}
+			
+			#bottom {
+				position: absolute;
+				right: 20px;
+				bottom: 20px;
+				list-style: none;
+				cursor:pointer;
+			}
+			
+			#bottom li {
+				width: 30px;
+				height: 30px;
+				opacity: .7;
+				font-weight: bold;
+				text-align: center;
+				line-height: 30px;
+				margin-right: 10px;
+			}
+			
+			.color_1{
+				background: aquamarine;
+			}
+			.color_2{
+				background: bisque;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="pic">
+				<ul id="top">
+					<li><img src="img/01.jpg"/></li>
+					<li><img src="img/02.jpg"/></li>
+					<li><img src="img/03.jpg"/></li>
+					<li><img src="img/04.jpg"/></li>
+					<li><img src="img/05.jpg"/></li>
+					<li><img src="img/06.jpg"/></li>
+					<li><img src="img/01.jpg"/></li>
+				</ul>
+			</div>
+			<div class="count">
+				<ul id="bottom">
+					<li class="color_1">1</li>
+					<li class="color_2">2</li>
+					<li class="color_2">3</li>
+					<li class="color_2">4</li>
+					<li class="color_2">5</li>
+					<li class="color_2">6</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script>
+		//把四张图片放在一行，通过改变ul 的left值让图片轮播
+		var oUl = document.getElementById("top")
+		var countList = document.getElementById("bottom").children;
+		var isComplete = false;
+		var pageIndex = 1;//默认显示第一张
+		var timer;
+		startPlan()
+		//图片自动播放
+		function startPlan() {
+			timer = setInterval(function() {
+				if(!isComplete) {
+					if(pageIndex == 7) {
+						oUl.style.left = "0px"; //第一张图片；
+						pageIndex = 1;
+					}
+					pageIndex++;
+					move(oUl, {
+						"left": -1 * (pageIndex - 1) * 800
+					});
+					for(var i = 0; i < countList.length; i++) {
+						countList[i].className = "color_2";
+					}
+					if(pageIndex == 7) {
+						countList[0].className = "color_1";
+					} else {
+						countList[pageIndex - 1].className = "color_1";
+					}
+				}
+			}, 2000);
+		}
+		
+		//鼠标移到数字上，图片跟着动；
+		for(var i = 0; i < countList.length; i++) {
+			countList[i].index = i;
+			countList[i].onmouseover= function() {
+				clearInterval(timer);
+				pageIndex = this.index + 1;
+				move(oUl, {
+					"left": -1 * this.index * 800
+				}, startPlan);
+				for(var k = 0; k < countList.length; k++) {
+					countList[k].className = "color_2";
+				}
+				this.className = "color_1";
+			}
+		}
+		//鼠标移到图片上图片停止播放，离开开始播放
+		oUl.onmouseover = function() {
+			isComplete = true;
+		}
+		oUl.onmouseout = function() {
+			isComplete = false;
+		}
+		
+		
+		
+	</script>
+	<script src="js/js.js" type="application/javascript"></script>
+</html>

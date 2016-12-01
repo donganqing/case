@@ -1,0 +1,101 @@
+
+@import "common.less";
+
+
+/*-----------------------------------------------------------*/
+
+.box{
+    .size( 400px, 400px );
+    .pos-rel();
+    .border(10px, red);
+    margin: 0 auto;
+    .radius(50%);
+    .font( 30px, bold, "宋体" );
+    .color( #eee, blue, orange, #fff, #f00 );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=blue,endColorstr=orange,gradientType=0);
+}
+
+/*--------------------------时钟刻度---------------------*/
+.circle{
+    .pos-abs(200px, 0px, 0px, 0px);
+}
+.point{
+    .size( 2px, 10px );
+    .bac( #000 );
+    .pos( 0%, );
+    .margin( -1px );
+    .origin( 1px, 200px );
+     transform:rotate(0deg);
+}
+
+.loop-point( 2 );
+
+.twelve{
+    .pos-abs( 185px, 0px, 10px, 0px )
+}
+
+.three{
+    .pos-abs( 370px, 0px, 182px, 0px )
+}
+.six{
+    .pos-abs( 192px, 0px, 355px, 0px )
+}
+.nine{
+    .pos-abs( 15px, 0px, 182px, 0px )
+}
+//----------------------指针
+.yuan{
+    .size( 400px, 400px );
+    .radius(50%);
+    .pos-abs( 0px, 0px, 0px, 0px );
+    .origin( 200px, 200px );
+}
+
+.miao{
+    .animation( time, 60s, 0s );
+    .fn-keyFrames(time);
+}
+/*
+@keyframes time{
+            from{transform: rotate(0deg);}
+            to{transform: rotate(360deg);}
+        }
+  */      
+        
+#miao{
+    .size( 2px, 160px );
+    .bac( #fff );
+    .pos-rel( 199px, 0px, 40px, 0px );
+    .origin( 1px, 160px );
+}
+
+.fen{
+    .animation( time, 3600s, 0s );
+    .fn-keyFrames(time);
+}
+
+#fen{
+    .size( 4px, 120px );
+    .bac( orange );
+    .pos-rel( 198px, 0px, 80px, 0px );
+    .origin( 2px, 120px );
+}
+
+.shi{
+    .animation( time, 43200s, 0s );
+    .fn-keyFrames(time);
+}
+
+#shi{
+    .size(8px, 90px);
+    .bac( red );
+    .pos-abs( 196px, 0px, 110px, 0px );
+    .origin( 4px, 90px );
+}
+
+.xin{
+    .size( 10px, 10px );
+    .radius(50%);
+    .pos-abs( 195px, 0px, 195px, 0px );
+    .bac( orange );
+}
